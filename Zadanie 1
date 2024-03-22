@@ -1,0 +1,40 @@
+using System;
+
+class ZgadywankaLiczby
+{
+    static void Main()
+    {
+        Random random = new Random();
+        // Zakładamy, że losowa liczba znajduje się w przedziale od 1 do 100.
+        int szukanaLiczba = random.Next(1, 101);
+
+        Console.WriteLine("Zgadnij liczbę całkowitą od 1 do 100.");
+
+        while (true)
+        {
+            Console.Write("Podaj liczbę: ");
+            string wprowadzonaLinia = Console.ReadLine();
+            int zgadnietaLiczba;
+
+            if (!int.TryParse(wprowadzonaLinia, out zgadnietaLiczba))
+            {
+                Console.WriteLine("To nie jest poprawna liczba całkowita. Spróbuj ponownie.");
+                continue;
+            }
+
+            if (zgadnietaLiczba < szukanaLiczba)
+            {
+                Console.WriteLine("Szukana liczba jest większa.");
+            }
+            else if (zgadnietaLiczba > szukanaLiczba)
+            {
+                Console.WriteLine("Szukana liczba jest mniejsza.");
+            }
+            else
+            {
+                Console.WriteLine("Gratulacje! Zgadłeś liczbę.");
+                break;
+            }
+        }
+    }
+}
