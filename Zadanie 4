@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Ile elementów będzie miał zbior A? ");
+        int liczbaElementowA = int.Parse(Console.ReadLine());
+        Console.WriteLine("Podaj elementy zbioru A:");
+        HashSet<int> zbiorA = new HashSet<int>(WczytajElementy(liczbaElementowA));
+
+        Console.Write("Ile elementów będzie miał zbior B? ");
+        int liczbaElementowB = int.Parse(Console.ReadLine());
+        Console.WriteLine("Podaj elementy zbioru B:");
+        HashSet<int> zbiorB = new HashSet<int>(WczytajElementy(liczbaElementowB));
+
+        
+        HashSet<int> suma = new HashSet<int>(zbiorA);
+        suma.UnionWith(zbiorB);
+        WypiszZbior("Suma zbiorów A i B:", suma);
+
+        HashSet<int> roznicaAB = new HashSet<int>(zbiorA);
+        roznicaAB.ExceptWith(zbiorB);
+        WypiszZbior("Różnica zbiorów A - B:", roznicaAB);
+
+        HashSet<int> czescWspolna = new HashSet<int>(zbiorA);
+        czescWspolna.IntersectWith(zbiorB);
+        WypiszZbior("Część wspólna zbiorów A i B:", czescWspolna);
+
+        HashSet<int> roznicaSymetryczna = new HashSet<int>(zbiorA);
+        roznicaSymetryczna.SymmetricExceptWith(zbiorB);
+        WypiszZbior("Różnica symetryczna zbiorów A i B:", roznicaSymetryczna);
+    }
+
+    static List<int> WczytajElementy(int liczbaElementow)
+    {
+        List<int> elementy = new List<int>();
+        for (int i = 0; i < liczbaElementow; i++)
+        {
+            if (int.TryParse(Console.ReadLine(), out int element))
+            {
+                elementy.Add(element);
+            }
+            else
+            {
+                Console.WriteLine("Niepoprawna wartość, proszę wprowadzić liczbę całkowitą.");
+                i--; // Zapewnia, że użytkownik musi wprowadzić poprawną liczbę
+            }
+        }
+        return elementy;
+    }
+
+    static void WypiszZbior(string komunikat, HashSet<int> zbior)
+    {
+        Console.WriteLine(komunikat);
+        foreach (int element in zbior)
+        {
+            Console.Write(element + " ");
+        }
+        Console.WriteLine("\n");
+    }
+}
