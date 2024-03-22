@@ -1,0 +1,51 @@
+using System;
+
+class LiczbaDziurBinarnych
+{
+    static void Main()
+    {
+        Console.Write("Podaj liczbę w formacie binarnym: ");
+        string binarnaReprezentacja = Console.ReadLine();
+
+        // Sprawdzenie, czy podany ciąg jest poprawną reprezentacją binarną
+        foreach (char bit in binarnaReprezentacja)
+        {
+            if (bit != '0' && bit != '1')
+            {
+                Console.WriteLine("Podany ciąg zawiera nieprawidłowe znaki. Użyj tylko 0 i 1.");
+                return;
+            }
+        }
+
+        int liczbaDziur = ZliczDziuryBinarnych(binarnaReprezentacja);
+        Console.WriteLine($"Liczba dziur binarnych: {liczbaDziur}");
+    }
+
+    static int ZliczDziuryBinarnych(string binarnaReprezentacja)
+    {
+        int liczbaDziur = 0;
+        bool wDziurze = false;
+
+        for (int i = 1; i < binarnaReprezentacja.Length - 1; i++)
+        {
+            if (binarnaReprezentacja[i] == '0')
+            {
+                if (binarnaReprezentacja[i - 1] == '1')
+                {
+                    wDziurze = true;
+                }
+                if (i == binarnaReprezentacja.Length - 2 && binarnaReprezentacja[i + 1] == '1' && wDziurze)
+                {
+                    liczbaDziur++;
+                }
+            }
+            else if (binarnaReprezentacja[i] == '1' && wDziurze)
+            {
+                liczbaDziur++;
+                wDziurze = false;
+            }
+        }
+
+        return liczbaDziur;
+    }
+}
