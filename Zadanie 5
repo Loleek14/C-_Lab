@@ -1,0 +1,41 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Podaj liczbę: ");
+        if (int.TryParse(Console.ReadLine(), out int liczba))
+        {
+            if (CzyPierwsza(liczba))
+            {
+                Console.WriteLine($"{liczba} jest liczbą pierwszą.");
+            }
+            else
+            {
+                Console.WriteLine($"{liczba} nie jest liczbą pierwszą.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Podana wartość nie jest liczbą całkowitą.");
+        }
+    }
+
+    static bool CzyPierwsza(int liczba)
+    {
+        if (liczba <= 1)
+        {
+            return false;
+        }
+
+        for (int i = 2; i * i <= liczba; i++)
+        {
+            if (liczba % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
