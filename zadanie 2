@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+
+class UnikatoweWartosci
+{
+    static void Main()
+    {
+        HashSet<int> unikatoweLiczby = new HashSet<int>();
+        Console.WriteLine("Wprowadź liczby całkowite (Użyj znaku '=', aby zakończyć):");
+
+        while (true)
+        {
+            string wprowadzonyTekst = Console.ReadLine();
+
+            if (wprowadzonyTekst.ToLower() == "=")
+            {
+                break;
+            }
+
+            if (int.TryParse(wprowadzonyTekst, out int liczba))
+            {
+                unikatoweLiczby.Add(liczba);
+            }
+            else
+            {
+                Console.WriteLine("To nie jest poprawna liczba całkowita, spróbuj jeszcze raz.");
+            }
+        }
+
+        Console.WriteLine($"Liczba unikatowych wartości: {unikatoweLiczby.Count}");
+    }
+}
